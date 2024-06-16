@@ -7,3 +7,6 @@ To install dependencies run the following command
 ```bash
 composer install
 ```
+
+To install NPM Dependencies run the following command
+
