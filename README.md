@@ -12,7 +12,9 @@
 First You will Need to Install Dependencies
 
 Run the following command to install composer dependencies
-`composer install`
+```
+composer install
+```
 
 ## About Laravel
 
