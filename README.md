@@ -22,7 +22,7 @@ npm install
 ```
 
 # Start the Laravel Server
-```bash
+```
 php artisan serve
 ```
 
