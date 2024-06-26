@@ -17,7 +17,7 @@ composer install
 ```
 
 # Install Node Dependencies
-```bash
+```
 npm install 
 ```
 
