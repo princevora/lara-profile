@@ -41,6 +41,11 @@ return [
 
     'debug' => (bool) env('APP_DEBUG', false),
 
+    /**
+     * Application Base URL
+     */
+    'app_base' => env("APP_BASE_URL"),
+
     /*
     |--------------------------------------------------------------------------
     | Application URL

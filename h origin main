@@ -1,0 +1,151 @@
+[33mcommit 98933c4bdf5a6b1b70a3949df4895b18eee1c486[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: =princevora <=princevora522@gmail.com>
+Date:   Thu Jun 27 08:42:56 2024 +0530
+
+    Api changes
+
+ app/Helpers/helpers.php                            |   41 [32m+[m
+ app/Livewire/Users/Auth/Register.php               |  124 [32m++[m
+ app/Models/Badge.php                               |   11 [32m+[m
+ bootstrap/providers.php                            |    1 [32m+[m
+ composer.json                                      |    9 [32m+[m[31m-[m
+ composer.lock                                      |  148 [32m+[m[31m-[m
+ config/app.php                                     |    5 [32m+[m
+ config/notify.php                                  |   49 [32m+[m
+ .../0001_01_01_000000_create_users_table.php       |   14 [32m+[m[31m-[m
+ .../2024_06_23_064932_create_badges_table.php      |   29 [32m+[m
+ database/seeders/BadgeSeeder.php                   |   67 [32m+[m
+ database/seeders/DatabaseSeeder.php                |    7 [32m+[m[31m-[m
+ package-lock.json                                  | 2299 [32m++++++++++++++++++++[m
+ package.json                                       |    6 [32m+[m
+ postcss.config.js                                  |    6 [32m+[m
+ .../mckenziearts/laravel-notify/dist/notify.css    |    1 [32m+[m
+ .../laravel-notify/images/drake-error.jpg          |  Bin [31m0[m -> [32m148297[m bytes
+ .../laravel-notify/images/drake-success.jpg        |  Bin [31m0[m -> [32m66085[m bytes
+ .../laravel-notify/images/notifications.png        |  Bin [31m0[m -> [32m540078[m bytes
+ .../mckenziearts/laravel-notify/js/notify.js       |    1 [32m+[m
+ .../mckenziearts/laravel-notify/js/notify.js.map   |    1 [32m+[m
+ .../mckenziearts/laravel-notify/mix-manifest.json  |    4 [32m+[m
+ resources/css/app.css                              |    3 [32m+[m
+ resources/views/components/loader.blade.php        |   11 [32m+[m
+ .../views/livewire/users/auth/register.blade.php   |  193 [32m++[m
+ resources/views/pages/users/auth/layout.blade.php  |  120 [32m+[m
+ .../views/pages/users/auth/register.blade.php      |   10 [32m+[m
+ .../views/pages/users/dashboard/index.blade.php    |  278 [32m+++[m
+ .../pages/users/dashboard/layouts/layout.blade.php |   63 [32m+[m
+ .../pages/users/dashboard/layouts/navbar.blade.php |    0
+ .../users/dashboard/layouts/sidebar.blade.php      |   63 [32m+[m
+ resources/views/welcome.blade.php                  |  306 [32m++[m[31m-[m
+ routes/web.php                                     |    8 [32m+[m
+ tailwind.config.js                                 |   13 [32m+[m
+ 34 files changed, 3708 insertions(+), 183 deletions(-)
+
+[33mcommit 5681be44ef0552b16362fe47eff98e25c1cc0f65[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: =princevora <=princevora522@gmail.com>
+Date:   Mon Jun 17 15:46:09 2024 +0530
+
+    Initial commit
+
+ .editorconfig                                      |   18 [32m+[m
+ .env.example                                       |   64 [32m+[m
+ .gitattributes                                     |   11 [32m+[m
+ .gitignore                                         |   39 [32m+[m[31m-[m
+ README.md                                          |   73 [32m+[m[31m-[m
+ app/Http/Controllers/Controller.php                |    8 [32m+[m
+ app/Models/User.php                                |   47 [32m+[m
+ app/Providers/AppServiceProvider.php               |   24 [32m+[m
+ artisan                                            |   15 [32m+[m
+ bootstrap/app.php                                  |   18 [32m+[m
+ bootstrap/cache/.gitignore                         |    2 [32m+[m
+ bootstrap/providers.php                            |    5 [32m+[m
+ composer.json                                      |   65 [32m+[m
+ composer.lock                                      | 7832 [32m++++++++++++++++++++[m
+ config/app.php                                     |  126 [32m+[m
+ config/auth.php                                    |  115 [32m+[m
+ config/cache.php                                   |  107 [32m+[m
+ config/database.php                                |  170 [32m+[m
+ config/filesystems.php                             |   76 [32m+[m
+ config/logging.php                                 |  132 [32m+[m
+ config/mail.php                                    |  116 [32m+[m
+ config/queue.php                                   |  112 [32m+[m
+ config/services.php                                |   38 [32m+[m
+ config/session.php                                 |  217 [32m+[m
+ database/.gitignore                                |    1 [32m+[m
+ database/factories/UserFactory.php                 |   44 [32m+[m
+ .../0001_01_01_000000_create_users_table.php       |   49 [32m+[m
+ .../0001_01_01_000001_create_cache_table.php       |   35 [32m+[m
+ .../0001_01_01_000002_create_jobs_table.php        |   57 [32m+[m
+ database/seeders/DatabaseSeeder.php                |   23 [32m+[m
+ package.json                                       |   13 [32m+[m
+ phpunit.xml                                        |   33 [32m+[m
+ public/.htaccess                                   |   21 [32m+[m
+ public/favicon.ico                                 |    0
+ public/index.php                                   |   17 [32m+[m
+ public/robots.txt                                  |    2 [32m+[m
+ resources/css/app.css                              |    0
+ resources/js/app.js                                |    1 [32m+[m
+ resources/js/bootstrap.js                          |    4 [32m+[m
+ resources/views/welcome.blade.php                  |  172 [32m+[m
+ routes/console.php                                 |    8 [32m+[m
+ routes/web.php                                     |    7 [32m+[m
+ storage/app/.gitignore                             |    3 [32m+[m
+ storage/app/public/.gitignore                      |    2 [32m+[m
+ storage/framework/.gitignore                       |    9 [32m+[m
+ storage/framework/cache/.gitignore                 |    3 [32m+[m
+ storage/framework/cache/data/.gitignore            |    2 [32m+[m
+ storage/framework/sessions/.gitignore              |    2 [32m+[m
+ storage/framework/testing/.gitignore               |    2 [32m+[m
+ storage/framework/views/.gitignore                 |    2 [32m+[m
+ storage/logs/.gitignore                            |    2 [32m+[m
+ tests/Feature/ExampleTest.php                      |   19 [32m+[m
+ tests/TestCase.php                                 |   10 [32m+[m
+ tests/Unit/ExampleTest.php                         |   16 [32m+[m
+ vite.config.js                                     |   11 [32m+[m
+ 55 files changed, 9968 insertions(+), 32 deletions(-)
+
+[33mcommit 8e6edc0a643393912237a4092223da651c2b958f[m
+Author: Prince <122656064+princevora@users.noreply.github.com>
+Date:   Sun Jun 16 09:45:05 2024 +0530
+
+    Update README.md
+
+ README.md | 3 [32m+++[m
+ 1 file changed, 3 insertions(+)
+
+[33mcommit d938648929ebca7130c687911707c54229a02ff7[m
+Author: Prince <122656064+princevora@users.noreply.github.com>
+Date:   Sun Jun 16 09:44:54 2024 +0530
+
+    Update README.md
+
+ README.md | 3 [32m+++[m
+ 1 file changed, 3 insertions(+)
+
+[33mcommit 04c7d2a510e62e3ea6523163d04aec4ed89439ae[m
+Author: Prince <122656064+princevora@users.noreply.github.com>
+Date:   Sun Jun 16 09:43:51 2024 +0530
+
+    Update README.md
+
+ README.md | 4 [32m++++[m
+ 1 file changed, 4 insertions(+)
+
+[33mcommit b8d900ea639cd8c172e20d8a4e58a3e7d6dad2b9[m
+Author: Prince <122656064+princevora@users.noreply.github.com>
+Date:   Sun Jun 16 09:43:13 2024 +0530
+
+    Update README.md
+
+ README.md | 3 [32m+++[m
+ 1 file changed, 3 insertions(+)
+
+[33mcommit eedf81d128f9846d5299cdd40315f589afd9823f[m
+Author: Prince <122656064+princevora@users.noreply.github.com>
+Date:   Sat Jun 15 21:06:35 2024 +0530
+
+    Initial commit
+
+ .gitignore | 23 [32m+++++++++++++++++++++++[m
+ LICENSE    | 21 [32m+++++++++++++++++++++[m
+ README.md  |  2 [32m++[m
+ 3 files changed, 46 insertions(+)
