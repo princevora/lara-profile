@@ -25,6 +25,7 @@ npm install
 ```
 php artisan serve
 ```
+# Our Project is based on multiple Node JS Dependencies
 
 ## About Laravel
 
