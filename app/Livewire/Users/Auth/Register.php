@@ -3,7 +3,9 @@
 namespace App\Livewire\Users\Auth;
 
 use App\Models\Badge;
+use App\Rules\Dispoable;
 use Illuminate\Database\Eloquent\Collection;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
@@ -16,7 +18,6 @@ class Register extends Component
      * @var string $email
      */
 
-    #[Validate("required|email|string")]
     public string $email;
 
     /**
@@ -25,7 +26,6 @@ class Register extends Component
      * @var mixed $password
      */
 
-    #[Validate("required|min:8")]
     public mixed $password;
 
     /**
@@ -33,8 +33,10 @@ class Register extends Component
      * 
      * The $stage variable will be used to show diffrent forms
      * 1 : Initial Form - Email and password Form
+     * 2 : Second Form - Username Form
+     * 2 : Last Form - Badges Form
      */
-    public int $stage = 3;
+    public int $stage = 1;
 
     /**
      * @var string $username 
@@ -44,18 +46,7 @@ class Register extends Component
      */
     public string $username;
 
-    /**
-     * @var $badges
-     * 
-     */
-    public $badges;
-
     public $selectedBadges = [];
-
-    public function mount()
-    {
-        $this->badges = Badge::all();
-    }
 
     /**
      * @method \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory render()
@@ -70,55 +61,66 @@ class Register extends Component
         return view("components.loader");
     }
 
-    public function save()
+    public function save(): void
     {
-        // Validate form fields
-        // $this->validate();
-
         sleep(2);
 
         $this->stage = match ($this->stage) {
             1 => 2,
             2 => 3,
 
-                // Set defult to 1 if there is not any matches
-            default => 1,
+            default => 1, // Set defult to 1 if there is not any matches
         };
     }
 
-    public function register()
+    public function saveEmailAndPassword(): void
     {
-        return 1;
+        // Validate form fields
+        $this->validate([
+            "email" => ["required", "email", "unique:users,email", new Dispoable],
+            "password" => "required|min:8",
+        ]);
+
+        $this->save();
     }
 
     /**
-     * @param int $id
+     * @param string $username
+     * 
+     * @return void
      */
-    public function removeBadge(int $id)
+    #[On("save:username")]
+    public function saveUsername(string $username)
     {
-        // Check if the value exists in the selected badges strictly
-        if(strictCheckValue($id, $this->selectedBadges)){
+        // Initialize the username value
+        $this->username = $username;
 
-            // Run a foreachloop to get keys and values
-            foreach ($this->selectedBadges as $key => $value) {
-
-                // If the value and the id matches then unset the key - value
-                if($value == $id){
-                    unset($this->selectedBadges[$key]);
-                }
-            }
-        }
+        // Save the step to 3
+        $this->save();
     }
 
-    public function addBadge(int $id)
+    /**
+     * @param array<int, int> $selectedBadges
+     * 
+     * @return void
+     */
+    #[On("save:badges")]
+    public function saveBadges(array $selectedBadges): void
     {
-        if($this->badges instanceof Collection && !strictCheckValue($id, $this->selectedBadges)){
-            $this->selectedBadges[] = $id;
-        }
+        $this->selectedBadges = $selectedBadges;
     }
 
-    public function click()
+    /**
+     * @return void
+     */
+
+    public function submit()
     {
-        dd($this->selectedBadges);
+        $this->validate([
+            "selectedBadges" => "required|array",
+        ]);
+
+        dd($this->email, $this->username, $this->password, $this->selectedBadges);
+        // $this->save();
     }
 }

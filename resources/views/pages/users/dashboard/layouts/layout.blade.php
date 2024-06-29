@@ -14,8 +14,8 @@
     </title>
 
     <!-- Head Scripts -->
-    @yield("scripts-head")
-    
+    @yield('scripts-head')
+
     <!-- Custom stylings -->
     <style>
         .animate-slide {
@@ -41,14 +41,16 @@
     @notifyCss
 </head>
 
-<body class="h-full flex items-center justify-center bg-black text-white relative ">
+<body class="h-full bg-black text-white relative flex">
     @include('notify::components.notify')
-    <div class="absolute inset-x-0 -top-20 z-0">
+    {{-- <div class="absolute inset-x-0 -top-20 z-0">
         
-    </div>
+    </div> --}}
 
     <!-- Main content -->
-    @include("pages.users.dashboard.layouts.sidebar")
+    @include('pages.users.dashboard.layouts.sidebar')
+
+    @yield('content')
 
     <!-- Toastr Component -->
     <x-notify::notify />
@@ -57,7 +59,7 @@
     @notifyJs
 
     <!-- Scripts -->
-    @yield("scripts-body") 
+    @yield('scripts-body')
 </body>
 
 </html>
