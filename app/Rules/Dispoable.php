@@ -41,7 +41,7 @@ class Dispoable implements ValidationRule
          * Check if the domain exists in the file
          */
 
-        in_array($email_domain, $domains)
+        @in_array($email_domain, $domains)
             &&
             $fail("Provided :attribute is A disposable email, we do not accept it. Please try again later");
     }

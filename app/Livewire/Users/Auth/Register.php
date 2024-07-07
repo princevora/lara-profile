@@ -2,11 +2,11 @@
 
 namespace App\Livewire\Users\Auth;
 
-use App\Models\Badge;
+use App\Models\User;
 use App\Rules\Dispoable;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Livewire\Attributes\On;
-use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class Register extends Component
@@ -34,7 +34,8 @@ class Register extends Component
      * The $stage variable will be used to show diffrent forms
      * 1 : Initial Form - Email and password Form
      * 2 : Second Form - Username Form
-     * 2 : Last Form - Badges Form
+     * 3 : Last Form - Badges Form
+     * 4 : Saving Data to data base
      */
     public int $stage = 1;
 
@@ -45,8 +46,18 @@ class Register extends Component
      * For the form state 2
      */
     public string $username;
+    
+    /**
+     * @var string $name 
+     */
+    public string $name;
 
-    public $selectedBadges = [];
+    public array $selectedBadges, $globalErrors = [];
+
+    public function mount()
+    {
+        connectify('success', 'Connection Found', 'Success Message Here');
+    }
 
     /**
      * @method \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory render()
@@ -61,9 +72,9 @@ class Register extends Component
         return view("components.loader");
     }
 
-    public function save(): void
+    public function save($sleep = 2): void
     {
-        sleep(2);
+        sleep($sleep);
 
         $this->stage = match ($this->stage) {
             1 => 2,
@@ -77,11 +88,12 @@ class Register extends Component
     {
         // Validate form fields
         $this->validate([
+            "name" => "required|min:3",
             "email" => ["required", "email", "unique:users,email", new Dispoable],
             "password" => "required|min:8",
         ]);
 
-        $this->save();
+        $this->save(0.5);
     }
 
     /**
@@ -96,7 +108,7 @@ class Register extends Component
         $this->username = $username;
 
         // Save the step to 3
-        $this->save();
+        $this->save(0);
     }
 
     /**
@@ -108,19 +120,37 @@ class Register extends Component
     public function saveBadges(array $selectedBadges): void
     {
         $this->selectedBadges = $selectedBadges;
+
+        // Set the stage to saving
+        $this->stage = 4;
+
+        // Finally create user After all the process has been done
+        $this->dispatch("save:user")->self();
     }
 
-    /**
-     * @return void
-     */
-
-    public function submit()
+    #[On("save:user")]
+    public function createUser()
     {
-        $this->validate([
-            "selectedBadges" => "required|array",
-        ]);
+        try {
+            $user           = new User;
+            $user->name     = $this->name;
+            $user->email    = $this->email;
+            $user->username = $this->username;
+            $user->password = Hash::make($this->password);
+            $user->badges   = json_encode($this->selectedBadges);
 
-        dd($this->email, $this->username, $this->password, $this->selectedBadges);
-        // $this->save();
+            $user->save();
+
+            sleep(1);
+
+            $credentials = ['email' => $this->email, 'password' => $this->password];
+
+            Auth::attempt($credentials, true);
+
+            return $this->redirectRoute("user.dashboard", navigate: true);
+            
+        } catch (\Throwable $th) {
+            $this->globalErrors[] = "Faild To Save User, Existed With the Following details</br></br> Message: <code class='text-red-500'>{$th->getMessage()} </code> </br></br>  Code: <code class='text-red-500'>{$th->getCode()}</code>";
+        }
     }
 }

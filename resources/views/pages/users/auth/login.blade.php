@@ -12,7 +12,7 @@
     <div class="w-full max-w-sm space-y-8 z-50">
 
         <!-- Livewire Register Component -->
-        <livewire:users.auth.register lazy />
+        <livewire:users.auth.login lazy />
 
     </div>
 

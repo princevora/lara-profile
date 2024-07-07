@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="h-screen overflow-hidden">
+<html class="">
 
 <head>
     <meta charset="utf-8">
@@ -14,8 +14,8 @@
     </title>
 
     <!-- Head Scripts -->
-    @yield("scripts-head")
-    
+    @yield('scripts-head')
+
     <!-- Custom stylings -->
     <style>
         .animate-slide {
@@ -37,13 +37,14 @@
         }
     </style>
 
+    @yield("styles")
+
     <!-- Notify CSS -->
     @notifyCss
 </head>
 
-<body class="h-full flex items-center justify-center bg-gray-950 text-white relative overflow-hidden">
-    @include('notify::components.notify')
-    <div class="absolute inset-x-0 -top-20 z-0">
+<body class="h-full h-screen  flex items-center justify-center bg-gray-950 text-white relative overflow-auto">
+    <div class=" absolute inset-x-0 -top-20 z-0">
         <svg class="min-w-[80rem] -translate-x-60 md:translate-x-0 mx-auto w-full -scale-y-100 contrast-150 opacity-50 dark:opacity-25"
             viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clip-path="url(#clip0_1739_2)">
@@ -107,14 +108,8 @@
     <!-- Main content -->
     @yield('content')
 
-    <!-- Toastr Component -->
-    <x-notify::notify />
-
-    <!-- Notify JS -->
-    @notifyJs
-
     <!-- Scripts -->
-    @yield("scripts-body") 
+    @yield('scripts-body')
 </body>
 
 </html>

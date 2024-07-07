@@ -4,6 +4,7 @@ namespace App\Livewire\Users\Auth;
 
 use App\Models\Badge;
 use Illuminate\Database\Eloquent\Collection;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\Features\SupportEvents\Event;
 
@@ -15,11 +16,40 @@ class RegisterBadges extends Component
      */
     public $badges;
 
+    #[Validate("required|array")]
     public $selectedBadges = [];
 
-    public function mount()
+    /**
+     * @var bool $showTitle
+     */
+    public bool $showTitle;
+
+    /**
+     * @var string $pageTitle
+     */
+    public string $pageTitle;
+
+    public bool $isForm;
+
+    /**
+     * @param bool   $showTitle     // Boolean value to decide show the heading on the form or not
+     * @param string $pageTitle     // String value to show the heading on the form
+     * @param bool   $isForm        // Boolean value for considering the component behaves like a form
+     * @param array  $primaryBadges // Array value for Selecting primary badges
+     * @return void
+     */
+    public function mount(
+        $showTitle = false, 
+        $pageTitle = "Add Badges", 
+        $isForm = false, 
+        array $primaryBadges = []
+    ): void
     {
-        $this->badges = Badge::all();
+        $this->badges         = Badge::all();
+        $this->pageTitle      = $pageTitle;
+        $this->showTitle      = $showTitle;
+        $this->isForm         = $isForm;
+        $this->selectedBadges = $primaryBadges;
     }
 
     /**
@@ -43,7 +73,10 @@ class RegisterBadges extends Component
      */
     public function save(): Event
     {
-        return $this->dispatch("save:badges", $this->selectedBadges);
+        // Validate the badges
+        $this->validate();
+
+        return $this->dispatch("save:badges", $this->selectedBadges)->to(Register::class);
     }
 
     /**

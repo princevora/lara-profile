@@ -127,13 +127,19 @@
                             Lara - profile helps you to make your profile - bio page to introduce your slef to others
                             within just few steps. Create your customizable landing page now.
                         </p>
+
+                        @php
+                            $isLoggedIn = Auth::check();
+                            $route = $isLoggedIn ? "user.dashboard" : "register";
+                        @endphp
+
                         <div class="items-center mt-6 gap-x-4 lg:gap-x-6 sm:flex sm: sm:justify-center lg:mt-8">
-                            <a href="{{ route("auth.register") }}"
+                            <a href="{{ route($route) }}"
                                 class="relative  inline-block w-full p-px rounded-lg sm:w-auto group h-11 bg-gradient-to-r from-purple-600 to-sky-500 dark:from-purple-600 dark:to-blue-400 before:absolute before:inset-0 before:bg-gradient-to-r before:from-purple-400 before:to-sky-400 dark:before:from-purple-600 dark:before:to-sky-500 before:scale-75 before:opacity-50 before:rounded-md before:blur-lg before:transition before:duration-300 active:before:scale-90 focus:before:scale-90 focus:before:opacity-75 hover:before:scale-100 hover:before:opacity-100"
                             >
                                 <p
                                     class="relative flex justify-center h-full text-sm font-medium items-center text-white tracking-wide bg-gray-950 px-[calc(1.5rem-1px)] rounded-[calc(0.5rem-1px)] group-hover:bg-gray-900 transition duration-300">
-                                    Create your BIO
+                                    {{ $isLoggedIn ? "Go To Dashboard" : "Create your BIO" }}
 
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="p-1 mx-0 size-10">

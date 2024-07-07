@@ -2,14 +2,18 @@
 
 namespace App\Livewire\Users\Auth;
 
+use Illuminate\Support\Facades\Context;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
-use Livewire\Features\SupportEvents\Event;
 
 class RegisterUsername extends Component
 {
+    public bool $isLoading = false;
+
     /**
      * @var string $username 
      */
+    #[Validate("required|min:3|alpha_dash|unique:users,username")]
     public string $username;
 
     /**
@@ -31,11 +35,11 @@ class RegisterUsername extends Component
     /**
      * @return \Livewire\Features\SupportEvents\Event
      */
-    public function save(): Event
+    public function save()
     {
         // Validate form fields
         $this->validate();
 
-        return $this->dispatch("save:username", $this->username);
+        return $this->dispatch("save:username", $this->username)->to(Register::class);
     }
 }
