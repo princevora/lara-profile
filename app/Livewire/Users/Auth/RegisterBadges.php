@@ -4,6 +4,7 @@ namespace App\Livewire\Users\Auth;
 
 use App\Models\Badge;
 use Illuminate\Database\Eloquent\Collection;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\Features\SupportEvents\Event;
@@ -29,6 +30,8 @@ class RegisterBadges extends Component
      */
     public string $pageTitle;
 
+    public string $accentColor;
+
     public bool $isForm;
 
     /**
@@ -36,13 +39,15 @@ class RegisterBadges extends Component
      * @param string $pageTitle     // String value to show the heading on the form
      * @param bool   $isForm        // Boolean value for considering the component behaves like a form
      * @param array  $primaryBadges // Array value for Selecting primary badges
+     * @param string $accentColor   // String value for giving the badges border color
      * @return void
      */
     public function mount(
         $showTitle = false, 
         $pageTitle = "Add Badges", 
         $isForm = false, 
-        array $primaryBadges = []
+        array $primaryBadges = [],
+        string $accentColor = "#94a3b8"
     ): void
     {
         $this->badges         = Badge::all();
@@ -50,6 +55,7 @@ class RegisterBadges extends Component
         $this->showTitle      = $showTitle;
         $this->isForm         = $isForm;
         $this->selectedBadges = $primaryBadges;
+        $this->accentColor    = $accentColor;
     }
 
     /**
@@ -98,10 +104,31 @@ class RegisterBadges extends Component
         }
     }
 
+    /**
+     * @param int $id
+     */
     public function addBadge(int $id)
     {
         if ($this->badges instanceof Collection && !strictCheckValue($id, $this->selectedBadges)) {
             $this->selectedBadges[] = $id;
         }
+    }
+
+    /**
+     * @param string $accentColor
+     */
+    #[On("updated:accent_color")]
+    public function setUpdatedAccentColor(string $accentColor): void
+    {
+        $this->accentColor = $accentColor;
+    }
+
+    /**
+     * @return \Livewire\Features\SupportEvents\Event
+     */
+    #[On('get:user_badges')]
+    public function sendUserBadges(): Event
+    {
+        return $this->dispatch("recive:user_badges", badges: $this->selectedBadges);
     }
 }

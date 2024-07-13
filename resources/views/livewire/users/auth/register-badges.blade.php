@@ -1,4 +1,4 @@
-<div>
+<div >
     @if ($showTitle)
         <p class="text-2xl text-center font-medium text-zinc-300">
             {{ $pageTitle }}
@@ -7,17 +7,22 @@
 
     <form class="mt-6 space-y-6" wire:submit.prevent="save">
         <div class="flex flex-wrap items-center justify-center mx-auto gap-1">
+
             @foreach ($badges as $badge)
-                <div wire:key="{{ $badge->id }}">
+                <div  wire:key="{{ $badge->id }}">
                     @php
                         $id = $badge->id;
                         $isAlreadySelected = strictCheckValue($id, $selectedBadges);
                         $function = $isAlreadySelected ? 'removeBadge' : 'addBadge';
                     @endphp
 
-                    <button wire:click.prevent="{{ $function }}({{ $id }})" wire:loading.attr="disabled"
-                        wire:target="{{ $function }}({{ $id }})" type="button"
-                        class="flex flex-row px-2 py-1 space-x-1 rounded-full justify-center items-center border border-slate-400 {{ !$isAlreadySelected ? 'opacity-40' : 'opacity-100' }}">
+                    <button 
+                            wire:click.prevent="{{ $function }}({{ $id }})" 
+                            wire:loading.attr="disabled"
+                            wire:target="{{ $function }}({{ $id }})" type="button"
+                            class="flex flex-row px-2 py-1 space-x-1 rounded-full justify-center items-center border {{ !$isAlreadySelected ? 'opacity-40' : 'opacity-100' }}"
+                            style="border-color: {{ $accentColor }}"
+                        >
                         <span class="w-3">
                             <img draggable="false" alt="{{ $badge->name }}"
                                 src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/{{ $badge->code }}.png">

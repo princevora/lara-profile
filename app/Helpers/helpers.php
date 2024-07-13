@@ -24,11 +24,16 @@ if (!function_exists("strictCheckValue")) {
 }
 
 if (!function_exists("badgeSpinner")) {
-    function badgeSpinner($target)
+    /**
+     * @param string $target
+     * @param string $classProperties
+     * @return string
+     */
+    function badgeSpinner(string $target, string $classProperties = "-ml-1 mt-1 mr-3"): string
     {
         return '
             <svg wire:loading wire:target="' . $target . '"
-                class="animate-spin -ml-1 mt-1 mr-3 h-4 w-3 text-white"
+                class="animate-spin '. $classProperties .' h-4 w-3 text-white"
                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                 <circle class="opacity-25" cx="12" cy="12" r="10"
                     stroke="currentColor" stroke-width="4"></circle>
