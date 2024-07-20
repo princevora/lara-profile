@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Users\PublicProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -17,4 +18,8 @@ Route::prefix("u")->middleware("auth")->group(function () {
     Route::get("logout", function(){
         return Auth::logout();
     });
+});
+
+Route::prefix("profile")->group(function () {
+    Route::get('{username}', PublicProfileController::class);
 });

@@ -170,7 +170,7 @@
             </div>
         </div>
     </div>
-    <form wire:submit.prevent="save">
+    <form wire:submit.prevent="save" class="relative">
         <div>
             <div class="flex flex-row items-center justify-between">
                 <label class="block text-sm text-left text-zinc-400 undefined" for="input_name">Name</label>
@@ -338,7 +338,8 @@
                         <div>
                             <div @click.prevent="if (color !== '{{ $accentColor }}') { $wire.setAccentColor(color); }"
                                 :title="color" :style="{ background: color }"
-                                class="flex rounded justify-center items-center w-16 h-14 sm:w-14 sm:h-12 opacity-60 transition-all">
+                                class="flex rounded justify-center items-center w-16 h-14 sm:w-14 sm:h-12 opacity-60 transition-all"
+                            >
                                 <div x-show="$wire.accentColor == color">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                         aria-hidden="true"
