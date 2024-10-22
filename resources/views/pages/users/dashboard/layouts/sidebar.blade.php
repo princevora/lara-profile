@@ -1,10 +1,6 @@
 <aside
     class="sticky top-0 flex flex-col items-center w-16 h-screen py-8 overflow-y-auto bg-black border-r rtl:border-l rtl:border-r-0 dark:bg-black border-none">
     <nav class="flex flex-col flex-1 space-y-6">
-        <a href="#">
-            <img class="w-auto h-6 " src="https://merakiui.com/images/logo.svg" alt="">
-        </a>
-
         <a href="{{ route('user.dashboard') }}"
             @class([
                 "p-1.5",
@@ -53,19 +49,21 @@
         </a>
 
         <div>
-            @if (is_null($user->avatar_path))
-                <div class="flex items-center justify-center w-10 h-10 bg-gray-300 rounded-full dark:bg-gray-700">
-                    <svg class="w-5 h-5 text-gray-200 dark:text-gray-600" aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
-                        <path
-                            d="M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z" />
-                    </svg>
-                </div>
-            @else
-                <img class="object-cover w-8 h-8 rounded-full"
-                    src="{{ asset($user->avatar_path) }}"
-                    alt="" />
-            @endif
+            <a href="{{ route('profile.show', $user->username) }}">
+                @if (is_null($user->avatar_path))
+                    <div class="flex items-center justify-center w-10 h-10 bg-gray-300 rounded-full dark:bg-gray-700">
+                        <svg class="w-5 h-5 text-gray-200 dark:text-gray-600" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
+                            <path
+                                d="M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z" />
+                        </svg>
+                    </div>
+                @else
+                    <img class="object-cover w-8 h-8 rounded-full"
+                        src="{{ asset($user->avatar_path) }}"
+                        alt="" />
+                @endif
+            </a>
         </div>
     </div>
 </aside>

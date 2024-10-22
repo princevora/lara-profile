@@ -19,6 +19,6 @@ Route::prefix("u")->middleware("auth")->group(function () {
     Route::get("logout", [AuthController::class, 'logout'])->name("user.logout");
 });
 
-Route::prefix("profile")->group(function () {
-    Route::get('{username}', PublicProfileController::class);
+Route::prefix("profile")->name('profile.')->group(function () {
+    Route::get('{username}', PublicProfileController::class)->name('show');
 });
