@@ -52,6 +52,7 @@
     </style>
     <!-- Notify CSS -->
     @notifyCss
+    @livewireStyles
 </head>
 
 <body class="h-full bg-black text-white relative flex">
@@ -138,6 +139,7 @@
 
     <!-- Scripts -->
     @yield('scripts-body')
+    @livewireScripts
 </body>
 
 </html>

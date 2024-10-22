@@ -122,6 +122,7 @@
             <livewire:users.auth.register-badges 
                 lazy 
                 showTitle
+                isForm
             />
         @break
 

@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\Users\AuthController;
 use App\Http\Controllers\Users\PublicProfileController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -15,9 +15,8 @@ Route::prefix("auth")->middleware("guest")->group(function () {
 
 Route::prefix("u")->middleware("auth")->group(function () {
     Route::view('dashboard', 'pages.users.dashboard.index')->name("user.dashboard");
-    Route::get("logout", function(){
-        return Auth::logout();
-    });
+    Route::view('socials', 'pages.users.dashboard.manage-socials')->name('user.socials');
+    Route::get("logout", [AuthController::class, 'logout'])->name("user.logout");
 });
 
 Route::prefix("profile")->group(function () {
