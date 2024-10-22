@@ -44,7 +44,7 @@ return [
     /**
      * Application Base URL
      */
-    'app_base' => env("APP_BASE_URL"),
+    'app_base' => env("APP_URL"),
 
     /*
     |--------------------------------------------------------------------------

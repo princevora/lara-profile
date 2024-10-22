@@ -9,7 +9,7 @@
         }
     </style>
 @section('content')
-    <div class="w-full max-w-sm space-y-8 z-50">
+    <div class="w-full max-w-lg space-y-8 z-50">
 
         <!-- Livewire Register Component -->
         <livewire:users.auth.register lazy />

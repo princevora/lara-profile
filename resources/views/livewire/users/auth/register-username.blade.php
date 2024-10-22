@@ -1,12 +1,12 @@
-<div>
+<div class="max-w-full">
     <p class="text-2xl text-center font-medium text-zinc-300">
         Choose Username
     </p>
     <form class="mt-6 space-y-6" wire:submit.prevent="save">
         <div class="-space-y-px rounded-md shadow-sm">
-            <div class="relative flex items-center">
+            <div class="relative grid grid-cols-[auto_50%]">
                 <p
-                    class="py-2 px-3 text-gray-500 bg-gray-100 dark:bg-gray-800 dark:border-gray-700 border border-r-0 rounded-l-lg">
+                    class="py-2 px-1 text-gray-500 bg-gray-100 dark:bg-gray-800 dark:border-gray-700 border border-r-0 rounded-l-lg">
                     {{ config('app.app_base') }}/
                 </p>
                 <label for="username" class="sr-only">Username</label>
