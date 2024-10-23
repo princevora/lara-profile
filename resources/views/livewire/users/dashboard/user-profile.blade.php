@@ -120,6 +120,7 @@
 
                         @endif
 
+                        {{-- @dd($banner , $userBanner, $banner , $userBanner) --}}
                         @if (!$banner && !$userBanner)
                             <div wire:loading.remove wire:target='banner'
                                 class="flex items-center justify-center w-36 h-20 bg-gray-300 rounded dark:bg-gray-700">
@@ -136,7 +137,7 @@
                             class="animate-pulse rounded bg-gray-300 dark:bg-gray-600 w-36 h-20"
                         >
                         </div>
-                        @if ($banner instanceof Livewire\Features\SupportFileUploads\TemporaryUploadedFile || !is_null($userBanner))
+                        @if ($banner instanceof Livewire\Features\SupportFileUploads\TemporaryUploadedFile || (!is_null($userBanner) && !empty($userBanner)))
                             @php
                                 $src = 
                                     $banner instanceof Livewire\Features\SupportFileUploads\TemporaryUploadedFile  //Condition
