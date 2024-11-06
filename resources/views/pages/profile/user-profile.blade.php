@@ -112,7 +112,7 @@
     </div>
 
     <script>
-        const iframe = `<iframe src="{{ url()->current() }}" title="{{ $profile->name }}'s Profile at Lara Profile"></iframe>`;
+        const iframe = `<iframe src="{{ url()->current() }}" allow="clipboard-write" title="{{ $profile->name }}'s Profile at Lara Profile"></iframe>`;
 
         const copyIframe = async () => {
             if(iframe){
