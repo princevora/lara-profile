@@ -104,8 +104,37 @@
                     @endif
                 </div>
             </div>
+
         </div>
+        <button onclick="copyIframe()" id="btn" class="inline-flex text-xs bg-red-500 text-white rounded-full p-2 w-auto mx-auto mt-4">
+            Copy The Profile's HTML Code
+        </button>
     </div>
+
+    <script>
+        const iframe = `<iframe src="{{ url()->current() }}" title="{{ $profile->name }}'s Profile at Lara Profile"></iframe>`;
+
+        const copyIframe = async () => {
+            if(iframe){
+                const btn = document.getElementById('btn');
+                const innerText = btn.innerText;
+
+                // Change btn inner Text
+                btn.innerText = 'Copying..';
+
+                await navigator.clipboard.writeText(iframe).
+                    then(() => {
+                        btn.innerText = 'Copied';
+                        btn.onclick = null;
+
+                        setTimeout(() => {
+                            btn.innerText = innerText;
+                            btn.onclick = copyIframe;
+                        }, 1500);
+                    })
+            }
+        }
+    </script>
 </body>
 
 </html>
