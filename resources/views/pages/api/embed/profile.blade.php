@@ -41,8 +41,8 @@
         </div>
     </div>
 
-    <!-- Powered by Lara Profile -->
-    <div class="absolute bottom-4 left-0 right-0 text-center text-xs text-gray-500 dark:text-gray-400">
+    <!-- Powered by Lara Profile (At the bottom) -->
+    <div class="mt-auto text-center text-xs text-gray-500 dark:text-gray-400 py-2">
         Powered by <a href="https://yourwebsite.com" class="text-blue-500 hover:underline">Lara Profile</a>
     </div>
 
