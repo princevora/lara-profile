@@ -13,10 +13,14 @@ Route::prefix("auth")->middleware("guest")->group(function () {
     Route::view('login', 'pages.users.auth.login')->name("login");
 });
 
-Route::prefix("u")->middleware("auth")->group(function () {
-    Route::view('dashboard', 'pages.users.dashboard.index')->name("user.dashboard");
-    Route::view('socials', 'pages.users.dashboard.manage-socials')->name('user.socials');
-    Route::get("logout", [AuthController::class, 'logout'])->name("user.logout");
+Route::prefix("u")->middleware("auth")->name('user.')->group(function () {
+    Route::view('dashboard', 'pages.users.dashboard.index')->name("dashboard");
+    Route::view('socials', 'pages.users.dashboard.manage-socials')->name('socials');
+    Route::get("logout", [AuthController::class, 'logout'])->name("logout");
+});
+
+Route::prefix('api')->name('api.')->group(function() {
+    Route::get('embed/{username}', [PublicProfileController::class, 'embedUserProfile'])->name('embed.profile');
 });
 
 Route::prefix("profile")->name('profile.')->group(function () {

@@ -12,7 +12,22 @@ use Illuminate\Support\Facades\Http;
 class PublicProfileController extends Controller
 {
     public function __invoke(Request $request)
-    {   
+    {
+        list($profile, $badges) =  $this->getUserData($request);
+
+        return view("pages.profile.user-profile")->with(compact('profile', 'badges'));
+    }
+    
+    public function embedUserProfile(Request $request)
+    {
+        list($profile, $badges) =  $this->getUserData($request);
+    
+        return view('pages.api.embed.profile')->with(compact('profile', 'badges'));
+        
+    }
+
+    private function getUserData(Request $request)
+    {
         $profile = User::query()->where('username', $request->username)
             ->firstOrFail([
                 "name",
@@ -24,11 +39,11 @@ class PublicProfileController extends Controller
                 "banner_path",
                 "avatar_path",
                 "created_at",
-                "updated_at" 
+                "updated_at"
             ]);
 
         $badges = Badge::all()->toArray();
 
-        return view("pages.profile.user-profile")->with(compact('profile', 'badges'));
+        return [$profile, $badges];
     }
 }

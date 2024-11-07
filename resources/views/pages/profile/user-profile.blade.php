@@ -25,31 +25,7 @@
         </button>
     </div>
 
-    <script>
-        const iframe =
-            `<iframe src="{{ url()->current() }}" allow="clipboard-write" title="{{ $profile->name }}'s Profile at Lara Profile"></iframe>`;
-
-        const copyIframe = async () => {
-            if (iframe) {
-                const btn = document.getElementById('btn');
-                const innerText = btn.innerText;
-
-                // Change btn inner Text
-                btn.innerText = 'Copying..';
-
-                await navigator.clipboard.writeText(iframe).
-                then(() => {
-                    btn.innerText = 'Copied';
-                    btn.onclick = null;
-
-                    setTimeout(() => {
-                        btn.innerText = innerText;
-                        btn.onclick = copyIframe;
-                    }, 800);
-                })
-            }
-        }
-    </script>
+    @stack('scripts')
 </body>
 
 </html>
