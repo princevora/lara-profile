@@ -13,9 +13,9 @@
     @vite('resources/css/app.css')
 </head>
 
-<body class="relative">
-    <div
-        class="select-none relative flex h-screen w-full flex-col justify-center overflow-auto bg-gray-100 text-gray-600 dark:text-gray-400 dark:bg-gray-900">
+<body class="relative min-h-screen flex flex-col bg-gray-100 text-gray-600 dark:text-gray-400 dark:bg-gray-900">
+
+    <div class="flex-1 select-none flex flex-col justify-center items-center overflow-auto">
         
         <x-render-user-profile :profile="$profile" :badges="$badges" />
 
@@ -39,11 +39,11 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Powered by Lara Profile -->
-        <div class="absolute bottom-4 left-0 right-0 text-center text-xs text-gray-500 dark:text-gray-400">
-            Powered by <a href="https://yourwebsite.com" class="text-blue-500 hover:underline">Lara Profile</a>
-        </div>
+    <!-- Powered by Lara Profile -->
+    <div class="absolute bottom-4 left-0 right-0 text-center text-xs text-gray-500 dark:text-gray-400">
+        Powered by <a href="https://yourwebsite.com" class="text-blue-500 hover:underline">Lara Profile</a>
     </div>
 
     @stack('scripts')
