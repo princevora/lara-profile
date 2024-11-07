@@ -7,7 +7,7 @@
         </div>
     </div>
 
-    <div class="max-w-full w-[800px] mx-auto grid grid-cols-2 gap-3">
+    <div class="max-w-full w-[800px] mx-auto grid grid-cols-2 gap-3 mt-5">
         <!-- Profile Info And Bio -->
         <div class="flex justify-center items-center pl-4 flex-wrap break-words">
             <div class="relative bg-gray-950 h-auto w-full rounded-xl bg-opacity-25 p-5 pt-10 flex flex-col">
