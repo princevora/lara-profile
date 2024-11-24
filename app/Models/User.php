@@ -44,4 +44,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function testomonials()
+    {
+        $this->belongsTo(Testomonial::class);
+    }
 }
