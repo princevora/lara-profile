@@ -10,7 +10,7 @@
         <div class="relative">
             <input type="text"
                 class="w-full bg-gray-700 text-white border border-gray-600 rounded-lg py-3 px-4 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                value="https://example.com/testimonials/{{ $user->username }}" disabled />
+                value="{{ route('testomonials.submit', $user->username) }}" disabled />
             <button onclick="copyLink()"
                 class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg shadow-md flex items-center space-x-2 transition-all">
                 <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"

@@ -23,7 +23,7 @@ Route::prefix("u")->middleware("auth")->name('user.')->group(function () {
 });
 
 Route::prefix('testomonials')->name('testomonials.')->group(function () {
-
+    Route::view('{username}/submit', 'pages.testomonials.post')->name('submit');
 });
 
 Route::prefix('api')->name('api.')->group(function () {
