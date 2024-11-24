@@ -127,9 +127,9 @@
             <div class="relative mx-auto space-y-8 z-50">
                 <div class="flex flex-col items-center justify-center m-auto w-12/12 max-w-lg">
                     <div class="flex items-center w-full">
-                        <a class="text-zinc-600 text-sm" href="/manage">Dashboard</a>
+                        <a class="text-zinc-600 text-sm" href="{{ route('user.dashboard') }}">Dashboard</a>
                         <p class="mx-2 cursor-default select-none text-zinc-800">/</p>
-                        <a class="text-zinc-500 text-sm" href="/manage">{{ $user->username }}</a>
+                        <a class="text-zinc-500 text-sm" href="javascript:void(0)">{{ $user->username }}</a>
                     </div>
                     @yield('content')
                 </div>

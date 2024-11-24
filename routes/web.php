@@ -17,9 +17,16 @@ Route::prefix("u")->middleware("auth")->name('user.')->group(function () {
     Route::view('dashboard', 'pages.users.dashboard.index')->name("dashboard");
     Route::view('socials', 'pages.users.dashboard.manage-socials')->name('socials');
     Route::get("logout", [AuthController::class, 'logout'])->name("logout");
+    Route::prefix('testomonials')->name('testomonials.')->group(function () {
+        Route::view('share-link', 'pages.users.dashboard.testomonials.link')->name('link');
+    });
 });
 
-Route::prefix('api')->name('api.')->group(function() {
+Route::prefix('testomonials')->name('testomonials.')->group(function () {
+
+});
+
+Route::prefix('api')->name('api.')->group(function () {
     Route::get('embed/{username}', [PublicProfileController::class, 'embedUserProfile'])->name('embed.profile');
 });
 

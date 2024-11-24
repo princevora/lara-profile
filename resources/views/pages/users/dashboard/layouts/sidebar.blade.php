@@ -20,7 +20,7 @@
             </svg>
         </a>
 
-        <a @class([
+        <a href="{{ route('user.testomonials.link') }}" @class([
             'p-1.5',
             'text-gray-700',
             'focus:outline-nones',
