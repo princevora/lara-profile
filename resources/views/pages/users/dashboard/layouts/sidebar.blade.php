@@ -1,19 +1,18 @@
 <aside
     class="sticky top-0 flex flex-col items-center w-16 h-screen py-8 overflow-y-auto bg-black border-r rtl:border-l rtl:border-r-0 dark:bg-black border-none">
     <nav class="flex flex-col flex-1 space-y-6">
-        <a href="{{ route('user.dashboard') }}"
-            @class([
-                "p-1.5",
-                "text-gray-700",
-                "focus:outline-nones",
-                "transition-colors",
-                "duration-200",
-                "rounded-lg",
-                "dark:text-gray-200",
-                "dark:hover:bg-gray-800",
-                "hover:bg-gray-100",
-                "bg-gray-600" => request()->routeIs('user.dashboard')
-            ]) >
+        <a href="{{ route('user.dashboard') }}" @class([
+            'p-1.5',
+            'text-gray-700',
+            'focus:outline-nones',
+            'transition-colors',
+            'duration-200',
+            'rounded-lg',
+            'dark:text-gray-200',
+            'dark:hover:bg-gray-800',
+            'hover:bg-gray-100',
+            'bg-gray-600' => request()->routeIs('user.dashboard'),
+        ])>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -21,31 +20,33 @@
             </svg>
         </a>
 
-        <a 
-            @class([
-                "p-1.5",
-                "text-gray-700",
-                "focus:outline-nones",
-                "transition-colors",
-                "duration-200",
-                "rounded-lg",
-                "dark:text-gray-200",
-                "dark:hover:bg-gray-800",
-                "hover:bg-gray-100",
-            ])>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M16.712 4.33a9.027 9.027 0 0 1 1.652 1.306c.51.51.944 1.064 1.306 1.652M16.712 4.33l-3.448 4.138m3.448-4.138a9.014 9.014 0 0 0-9.424 0M19.67 7.288l-4.138 3.448m4.138-3.448a9.014 9.014 0 0 1 0 9.424m-4.138-5.976a3.736 3.736 0 0 0-.88-1.388 3.737 3.737 0 0 0-1.388-.88m2.268 2.268a3.765 3.765 0 0 1 0 2.528m-2.268-4.796a3.765 3.765 0 0 0-2.528 0m4.796 4.796c-.181.506-.475.982-.88 1.388a3.736 3.736 0 0 1-1.388.88m2.268-2.268 4.138 3.448m0 0a9.027 9.027 0 0 1-1.306 1.652c-.51.51-1.064.944-1.652 1.306m0 0-3.448-4.138m3.448 4.138a9.014 9.014 0 0 1-9.424 0m5.976-4.138a3.765 3.765 0 0 1-2.528 0m0 0a3.736 3.736 0 0 1-1.388-.88 3.737 3.737 0 0 1-.88-1.388m2.268 2.268L7.288 19.67m0 0a9.024 9.024 0 0 1-1.652-1.306 9.027 9.027 0 0 1-1.306-1.652m0 0 4.138-3.448M4.33 16.712a9.014 9.014 0 0 1 0-9.424m4.138 5.976a3.765 3.765 0 0 1 0-2.528m0 0c.181-.506.475-.982.88-1.388a3.736 3.736 0 0 1 1.388-.88m-2.268 2.268L4.33 7.288m6.406 1.18L7.288 4.33m0 0a9.024 9.024 0 0 0-1.652 1.306A9.025 9.025 0 0 0 4.33 7.288" />
-              </svg>              
+        <a @class([
+            'p-1.5',
+            'text-gray-700',
+            'focus:outline-nones',
+            'transition-colors',
+            'duration-200',
+            'rounded-lg',
+            'dark:text-gray-200',
+            'dark:hover:bg-gray-800',
+            'hover:bg-gray-100',
+        ])>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+            </svg>
         </a>
     </nav>
 
     <div class="flex flex-col space-y-6">
-        <a href="{{ route('user.logout') }}"
-            wire:navigate
+        <a href="{{ route('user.logout') }}" wire:navigate
             class="p-1.5 text-gray-700 focus:outline-nones transition-colors duration-200 rounded-lg dark:text-gray-200 dark:hover:bg-gray-800 hover:bg-gray-100">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15M12 9l3 3m0 0-3 3m3-3H2.25" />
-              </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15M12 9l3 3m0 0-3 3m3-3H2.25" />
+            </svg>
         </a>
 
         <div>
@@ -59,8 +60,7 @@
                         </svg>
                     </div>
                 @else
-                    <img class="object-cover w-8 h-8 rounded-full"
-                        src="{{ asset($user->avatar_path) }}"
+                    <img class="object-cover w-8 h-8 rounded-full" src="{{ asset($user->avatar_path) }}"
                         alt="" />
                 @endif
             </a>
