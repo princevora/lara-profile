@@ -27,7 +27,7 @@ class Post extends Component
     #[Validate('required')]
     public string $description;
 
-    public function mount(Request $request, Testomonial $ts)
+    public function mount(Request $request)
     {
         $this->user = User::where('username', $request->username)->firstOrFail();
     }
@@ -43,5 +43,7 @@ class Post extends Component
     public function save()
     {
         $this->validate();
+
+        
     }
 }
